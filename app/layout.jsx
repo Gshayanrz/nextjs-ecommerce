@@ -4,7 +4,11 @@ import Header from "@/components/layout/Header"
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="fa" dir="rtl">
+    <html
+      lang="fa"
+      dir="rtl"
+      suppressHydrationWarning // Fix Hydration Error
+    >
       <body>
         <Header />
         {children}
