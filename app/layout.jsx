@@ -1,6 +1,7 @@
 import BootstrapClient from "@/components/libraries/Bootstrap"
 import "./globals.css"
 import Header from "@/components/layout/Header"
+import { ToastContainer } from "react-toastify"
 
 export default function RootLayout({ children }) {
   return (
@@ -13,6 +14,7 @@ export default function RootLayout({ children }) {
         <Header />
         {children}
         <BootstrapClient />
+        <ToastContainer />
       </body>
     </html>
   )
