@@ -1311,3 +1311,11 @@ a:focus {
     width: 50%;
   }
 }
+
+.Toastify__toast-theme--light {
+  font-family: "Vazir" !important;
+}
+
+.Toastify__toast-icon {
+  margin-inline: 10px;
+}

@@ -9,9 +9,10 @@ const FormContact = () => {
   const [state, formAction] = useActionState(contact, {})
 
   useEffect(() => {
-    if (state?.status === "error") {
-      toast.error(state.message)
-    }
+    toast(state?.message, { type: `${state?.status}` })
+    // if (state?.status === "error") {
+    //   toast.error(state.message)
+    // }
   }, [state])
   return (
     <div className="form_container">
