@@ -1,5 +1,7 @@
 import React from "react"
 import FormContact from "./Form"
+import dynamic from "next/dynamic"
+import MapWrapper from "./MapWrapper"
 
 const Contact = () => {
   return (
@@ -14,7 +16,7 @@ const Contact = () => {
           </div>
           <div className="col-md-6">
             <div className="map_container ">
-              <div id="map" style={{ height: "345px" }}></div>
+              <MapWrapper />
             </div>
           </div>
         </div>

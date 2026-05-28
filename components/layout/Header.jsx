@@ -1,9 +1,14 @@
+"use client"
+
 import heroImage from "@/public/images/hero-bg.jpg"
 import Image from "next/image"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
 
 const Header = () => {
+  const pathName = usePathname()
   return (
-    <div>
+    <div className={pathName === "/" ? "" : "sub_page"}>
       <div className="hero_area">
         <div className="bg-box">
           <Image src={heroImage} priority alt="hero-bg" />
@@ -11,9 +16,9 @@ const Header = () => {
         <header className="header_section">
           <div className="container">
             <nav className="navbar navbar-expand-lg custom_nav-container">
-              <a className="navbar-brand" href="index.html">
-                <span>webprog.io</span>
-              </a>
+              <Link className="navbar-brand" href="/">
+                <span>Mister Rz</span>
+              </Link>
               <button
                 className="navbar-toggler"
                 type="button"
@@ -30,25 +35,45 @@ const Header = () => {
                 id="navbarSupportedContent"
               >
                 <ul className="navbar-nav mx-auto">
-                  <li className="nav-item active">
-                    <a className="nav-link" href="index.html">
+                  <li
+                    className={
+                      pathName === "/" ? "nav-item active" : "nav-item"
+                    }
+                  >
+                    <Link className="nav-link" href="/">
                       صفحه اصلی
-                    </a>
+                    </Link>
                   </li>
-                  <li className="nav-item">
-                    <a className="nav-link" href="menu.html">
+                  <li
+                    className={
+                      pathName === "/menu" ? "nav-item active" : "nav-item"
+                    }
+                  >
+                    <Link className="nav-link" href="/menu">
                       منو
-                    </a>
+                    </Link>
                   </li>
-                  <li className="nav-item">
-                    <a className="nav-link" href="about.html">
+                  <li
+                    className={
+                      pathName === "/about"
+                        ? "nav-item active"
+                        : "nav-item"
+                    }
+                  >
+                    <Link className="nav-link" href="/about">
                       درباره ما
-                    </a>
+                    </Link>
                   </li>
-                  <li className="nav-item">
-                    <a className="nav-link" href="contact.html">
+                  <li
+                    className={
+                      pathName === "/contact"
+                        ? "nav-item active"
+                        : "nav-item"
+                    }
+                  >
+                    <Link className="nav-link" href="/contact">
                       تماس باما
-                    </a>
+                    </Link>
                   </li>
                 </ul>
                 <div className="user_option">
@@ -70,114 +95,116 @@ const Header = () => {
           </div>
         </header>
 
-        <section className="slider_section">
-          <div
-            id="customCarousel1"
-            className="carousel slide"
-            data-bs-ride="carousel"
-          >
-            <div className="carousel-inner">
-              <div className="carousel-item active">
-                <div className="container">
-                  <div className="row">
-                    <div className="col-md-7 col-lg-6">
-                      <div className="detail-box">
-                        <h2 className="mb-3 fw-bold">
-                          لورم ایپسوم متن ساختگی
-                        </h2>
-                        <p>
-                          لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از
-                          صنعت چاپ و با استفاده از طراحان گرافیک است.
-                          چاپگرها و متون بلکه روزنامه و مجله در ستون و
-                          سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی
-                          مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای
-                          کاربردی می باشد.
-                        </p>
-                        <div className="btn-box">
-                          <a href="" className="btn1">
-                            سفارش
-                          </a>
+        {pathName === "/" && (
+          <section className="slider_section">
+            <div
+              id="customCarousel1"
+              className="carousel slide"
+              data-bs-ride="carousel"
+            >
+              <div className="carousel-inner">
+                <div className="carousel-item active">
+                  <div className="container">
+                    <div className="row">
+                      <div className="col-md-7 col-lg-6">
+                        <div className="detail-box">
+                          <h2 className="mb-3 fw-bold">
+                            لورم ایپسوم متن ساختگی
+                          </h2>
+                          <p>
+                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
+                            از صنعت چاپ و با استفاده از طراحان گرافیک است.
+                            چاپگرها و متون بلکه روزنامه و مجله در ستون و
+                            سطرآنچنان که لازم است و برای شرایط فعلی
+                            تکنولوژی مورد نیاز و کاربردهای متنوع با هدف
+                            بهبود ابزارهای کاربردی می باشد.
+                          </p>
+                          <div className="btn-box">
+                            <a href="" className="btn1">
+                              سفارش
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="carousel-item">
+                  <div className="container">
+                    <div className="row">
+                      <div className="col-md-7 col-lg-6">
+                        <div className="detail-box">
+                          <h2 className="mb-3 fw-bold">
+                            لورم ایپسوم متن ساختگی
+                          </h2>
+                          <p>
+                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
+                            از صنعت چاپ و با استفاده از طراحان گرافیک است.
+                            چاپگرها و متون بلکه روزنامه و مجله در ستون و
+                            سطرآنچنان که لازم است و برای شرایط فعلی
+                            تکنولوژی مورد نیاز و کاربردهای متنوع با هدف
+                            بهبود ابزارهای کاربردی می باشد.
+                          </p>
+                          <div className="btn-box">
+                            <a href="" className="btn1">
+                              سفارش
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="carousel-item">
+                  <div className="container">
+                    <div className="row">
+                      <div className="col-md-7 col-lg-6">
+                        <div className="detail-box">
+                          <h2 className="mb-3 fw-bold">
+                            لورم ایپسوم متن ساختگی
+                          </h2>
+                          <p>
+                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
+                            از صنعت چاپ و با استفاده از طراحان گرافیک است.
+                            چاپگرها و متون بلکه روزنامه و مجله در ستون و
+                            سطرآنچنان که لازم است و برای شرایط فعلی
+                            تکنولوژی مورد نیاز و کاربردهای متنوع با هدف
+                            بهبود ابزارهای کاربردی می باشد.
+                          </p>
+                          <div className="btn-box">
+                            <a href="" className="btn1">
+                              سفارش
+                            </a>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="carousel-item">
-                <div className="container">
-                  <div className="row">
-                    <div className="col-md-7 col-lg-6">
-                      <div className="detail-box">
-                        <h2 className="mb-3 fw-bold">
-                          لورم ایپسوم متن ساختگی
-                        </h2>
-                        <p>
-                          لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از
-                          صنعت چاپ و با استفاده از طراحان گرافیک است.
-                          چاپگرها و متون بلکه روزنامه و مجله در ستون و
-                          سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی
-                          مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای
-                          کاربردی می باشد.
-                        </p>
-                        <div className="btn-box">
-                          <a href="" className="btn1">
-                            سفارش
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="carousel-item">
-                <div className="container">
-                  <div className="row">
-                    <div className="col-md-7 col-lg-6">
-                      <div className="detail-box">
-                        <h2 className="mb-3 fw-bold">
-                          لورم ایپسوم متن ساختگی
-                        </h2>
-                        <p>
-                          لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از
-                          صنعت چاپ و با استفاده از طراحان گرافیک است.
-                          چاپگرها و متون بلکه روزنامه و مجله در ستون و
-                          سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی
-                          مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای
-                          کاربردی می باشد.
-                        </p>
-                        <div className="btn-box">
-                          <a href="" className="btn1">
-                            سفارش
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+              <div className="container">
+                <div className="carousel-indicators">
+                  <button
+                    type="button"
+                    data-bs-target="#customCarousel1"
+                    data-bs-slide-to="0"
+                    className="active"
+                  ></button>
+                  <button
+                    type="button"
+                    data-bs-target="#customCarousel1"
+                    data-bs-slide-to="1"
+                  ></button>
+                  <button
+                    type="button"
+                    data-bs-target="#customCarousel1"
+                    data-bs-slide-to="2"
+                  ></button>
                 </div>
               </div>
             </div>
-            <div className="container">
-              <div className="carousel-indicators">
-                <button
-                  type="button"
-                  data-bs-target="#customCarousel1"
-                  data-bs-slide-to="0"
-                  className="active"
-                ></button>
-                <button
-                  type="button"
-                  data-bs-target="#customCarousel1"
-                  data-bs-slide-to="1"
-                ></button>
-                <button
-                  type="button"
-                  data-bs-target="#customCarousel1"
-                  data-bs-slide-to="2"
-                ></button>
-              </div>
-            </div>
-          </div>
-        </section>
+          </section>
+        )}
       </div>
     </div>
   )
