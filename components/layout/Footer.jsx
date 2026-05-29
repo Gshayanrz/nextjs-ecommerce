@@ -32,7 +32,7 @@ const Footer = () => {
           <div className="col-md-4 footer-col">
             <div className="footer_detail">
               <a href="" className="footer-logo">
-                Mister Rz
+                Rz Store
               </a>
               <p>
                 لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و
