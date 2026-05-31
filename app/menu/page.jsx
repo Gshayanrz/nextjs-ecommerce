@@ -1,11 +1,13 @@
 import CategoriesList from "@/components/menu/CategoriesList"
+import LoadingMenu from "@/components/menu/Loading"
 import ProductsList from "@/components/menu/ProductsList"
 import { getFetch } from "@/utils/fetch"
-import React from "react"
+import React, { Suspense } from "react"
 
-const MenuPage = async () => {
+const MenuPage = async ({ searchParams }) => {
   const categories = await getFetch("/categories")
-
+  const sp = await searchParams
+  const params = new URLSearchParams(sp)
   return (
     <section className="food_section layout_padding">
       <div className="container">
@@ -72,7 +74,9 @@ const MenuPage = async () => {
             </div>
           </div>
           <div className="col-sm-12 col-lg-9">
-            <ProductsList />
+            <Suspense key={params.toString()} fallback={<LoadingMenu />}>
+              <ProductsList params={params.toString()} />
+            </Suspense>
           </div>
         </div>
       </div>
