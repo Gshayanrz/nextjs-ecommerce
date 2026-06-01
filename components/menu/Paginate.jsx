@@ -1,13 +1,14 @@
 "use client"
 
-import { usePathname, useRouter } from "next/navigation"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
 const PaginateMenu = ({ links }) => {
   const pathName = usePathname()
   const router = useRouter()
+  const searchParams = useSearchParams()
 
   const handlePage = (page) => {
-    const params = new URLSearchParams()
+    const params = new URLSearchParams(searchParams)
     params.set("page", page)
 
     router.replace(`${pathName}?${params.toString()}`)

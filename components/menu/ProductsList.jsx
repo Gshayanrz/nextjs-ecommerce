@@ -4,7 +4,12 @@ import PaginateMenu from "./Paginate"
 
 const ProductsList = async ({ params }) => {
   const data = await getFetch(`/menu?${params}`)
-  return (
+
+  return data.products.length == 0 ? (
+    <p className="text-center m-0 text-danger">
+      محصولی برای نمایش وجود ندارد
+    </p>
+  ) : (
     <>
       <div className="row gx-3">
         {data.products.map((product) => (
