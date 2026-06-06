@@ -1,5 +1,6 @@
 import { getBlurDataUrl } from "@/utils/helper"
 import Image from "next/image"
+import Link from "next/link"
 
 const Product = ({ product }) => {
   const { name, description, price, sale_price, primary_image, is_sale } =
@@ -23,7 +24,9 @@ const Product = ({ product }) => {
           />
         </div>
         <div className="detail-box">
-          <h5>{name}</h5>
+          <Link href={`products/${product.slug}`}>
+            <h5>{name}</h5>
+          </Link>
           <p>{description}</p>
           <div className="options">
             <h6>
