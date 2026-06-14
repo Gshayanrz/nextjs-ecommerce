@@ -5,7 +5,8 @@
   font-family: "Vazir";
   src: url(../public/fonts/Vazir.eot);
   /* IE9 Compat Modes */
-  src: url(../public/fonts/Vazir.eot) format("embedded-opentype"),
+  src:
+    url(../public/fonts/Vazir.eot) format("embedded-opentype"),
     url(../public/fonts/Vazir.woff2) format("woff2"),
     url(../public/fonts/Vazir.woff) format("woff"),
     url(../public/fonts/Vazir.ttf) format("truetype");
@@ -1318,4 +1319,10 @@ a:focus {
 
 .Toastify__toast-icon {
   margin-inline: 10px;
+}
+
+.resend-otp-btn {
+  position: absolute;
+  left: 15px;
+  bottom: 16px;
 }

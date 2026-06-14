@@ -1,16 +1,11 @@
 "use client"
 
-import { useActionState, useEffect } from "react"
-import SubmitFormButton from "@/components/SubmitFormButton"
-import { toast } from "react-toastify"
-import { loginActions } from "@/actions/auth"
+import CheckOtpForm from "@/components/auth/CheckOtpForm"
+import LoginForm from "@/components/auth/LoginForm"
+import { useState } from "react"
 
 const LoginPage = () => {
-  const [stateLogin, formActionLogin] = useActionState(loginActions, {})
-
-  useEffect(() => {
-    toast(stateLogin?.message, { type: `${stateLogin?.status}` })
-  }, [stateLogin])
+  const [step, setStep] = useState(1)
 
   return (
     <section className="auth_section book_section">
@@ -18,24 +13,8 @@ const LoginPage = () => {
         <div className="row mt-5">
           <div className="col-md-4 offset-md-4">
             <div className="card">
-              <div className="card-body">
-                <div className="form_container">
-                  <form action={formActionLogin}>
-                    <div className="mb-3">
-                      <label className="form-label">شماره موبایل</label>
-                      <input
-                        name="cellphone"
-                        type="text"
-                        className="form-control"
-                      />
-                    </div>
-                    <SubmitFormButton
-                      title="ورود"
-                      style="btn btn-primary btn-auth"
-                    />
-                  </form>
-                </div>
-              </div>
+              {step === 1 && <LoginForm setStep={setStep} />}
+              {step === 2 && <CheckOtpForm />}
             </div>
           </div>
         </div>
