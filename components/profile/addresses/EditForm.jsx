@@ -1,22 +1,16 @@
 "use client"
-import { createAddress } from "@/actions/profile"
+import { editAddress } from "@/actions/profile"
 import { useActionState, useEffect, useState } from "react"
 import { toast } from "react-toastify"
+import DeleteForm from "./DeleteForm"
 
-const CreateForm = ({ provinces, cities }) => {
-  //********                                                 ********//
-  // https://gapgpt.app/share/13xkpxyh-oiqg-nx3a-u8f3-9h9cff53m43ncc3
-  //********                                                 ********//
-
-  const [citiesFilter, setCitiesFilter] = useState(
-    cities.filter((city) => city.province_id == provinces[0].id)
-  )
-
-  const [stateCreate, formActionCreate] = useActionState(createAddress, {})
+const EditForm = ({ address, provinces, cities }) => {
+  const [stateEdit, formActionEdit] = useActionState(editAddress, {})
+  const [citiesFilter, setCitiesFilter] = useState(cities)
 
   useEffect(() => {
-    toast(stateCreate?.message, { type: `${stateCreate?.status}` })
-  }, [stateCreate])
+    toast(stateEdit?.message, { type: `${stateEdit?.status}` })
+  }, [stateEdit])
 
   const handleFilterCities = (e) => {
     setCitiesFilter(
@@ -26,24 +20,17 @@ const CreateForm = ({ provinces, cities }) => {
 
   return (
     <>
-      <button
-        className="btn btn-primary"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#collapseExample"
-      >
-        ایجاد آدرس جدید
-      </button>
-      <form
-        action={formActionCreate}
-        className="collapse mt-3"
-        id="collapseExample"
-      >
-        <div className="card card-body">
+      <div className="position-relative" id="collapseExample">
+        <form action={formActionEdit} className="card card-body mt-3">
           <div className="row g-4">
             <div className="col col-md-6">
               <label className="form-label">عنوان</label>
-              <input name="title" type="text" className="form-control" />
+              <input
+                name="title"
+                defaultValue={address.title}
+                type="text"
+                className="form-control"
+              />
             </div>
             <div className="col col-md-6">
               <label className="form-label">شماره تماس</label>
@@ -51,6 +38,7 @@ const CreateForm = ({ provinces, cities }) => {
                 name="cellphone"
                 type="text"
                 className="form-control"
+                defaultValue={address.cellphone}
               />
             </div>
             <div className="col col-md-6">
@@ -59,6 +47,7 @@ const CreateForm = ({ provinces, cities }) => {
                 name="postal_code"
                 type="text"
                 className="form-control"
+                defaultValue={address.postal_code}
               />
             </div>
             <div className="col col-md-6">
@@ -67,6 +56,7 @@ const CreateForm = ({ provinces, cities }) => {
                 name="province_id"
                 className="form-select"
                 onChange={handleFilterCities}
+                defaultValue={address.province_id}
               >
                 {provinces.map((province) => (
                   <option key={province.id} value={province.id}>
@@ -77,7 +67,11 @@ const CreateForm = ({ provinces, cities }) => {
             </div>
             <div className="col col-md-6">
               <label className="form-label">شهر</label>
-              <select name="city_id" className="form-select">
+              <select
+                name="city_id"
+                className="form-select"
+                defaultValue={address.city_id}
+              >
                 {citiesFilter.map((city) => (
                   <option key={city.id} value={city.id}>
                     {city.name}
@@ -92,16 +86,23 @@ const CreateForm = ({ provinces, cities }) => {
                 type="text"
                 rows="5"
                 className="form-control"
+                defaultValue={address.address}
               ></textarea>
             </div>
+            <input
+              type="hidden"
+              name="address_id"
+              value={address.id}
+            ></input>
           </div>
           <div>
-            <button className="btn btn-primary mt-4">ایجاد</button>
+            <button className="btn btn-primary mt-4">ویرایش</button>
           </div>
-        </div>
-      </form>
+        </form>
+        <DeleteForm addressId={address.id}/>
+      </div>
     </>
   )
 }
 
-export default CreateForm
+export default EditForm

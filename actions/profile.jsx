@@ -3,6 +3,8 @@
 import { postFetch } from "@/utils/fetch"
 import { handleError } from "@/utils/helper"
 import { cookies } from "next/headers"
+import { revalidatePath } from "next/cache"
+import { redirect } from "next/navigation"
 
 export const editInfo = async (state, formData) => {
   const name = formData.get("name")
@@ -34,6 +36,7 @@ export const editInfo = async (state, formData) => {
   )
 
   if (data.status == "success") {
+    revalidatePath("/profile/addresses")
     return {
       status: data.status,
       message: "اطلاعات با موفقیت ویرایش شد"
@@ -98,9 +101,116 @@ export const createAddress = async (state, formData) => {
   )
 
   if (data.status == "success") {
+    revalidatePath("/profile/addresses")
     return {
       status: data.status,
       message: "اطلاعات با موفقیت ثبت شد"
+    }
+  } else {
+    return {
+      status: data.status,
+      message: handleError(data.message)
+    }
+  }
+}
+
+export const editAddress = async (state, formData) => {
+  const title = formData.get("title")
+  const cellphone = formData.get("cellphone")
+  const postal_code = formData.get("postal_code")
+  const province_id = formData.get("province_id")
+  const city_id = formData.get("city_id")
+  const address = formData.get("address")
+  const address_id = formData.get("address_id")
+
+  if (title === "") {
+    return {
+      status: "error",
+      message: "وارد کردن عنوان الزامی است"
+    }
+  }
+  const cellphonePattern = /^(\+98|0)?9\d{9}$/
+  if (cellphone === "" || !cellphonePattern.test(cellphone)) {
+    return {
+      status: "error",
+      message: "فیلد شماره تماس نامعتبر است"
+    }
+  }
+  const postalCodePattern = /^\d{5}[ -]?\d{5}$/i
+  if (postal_code === "" || !postalCodePattern.test(postal_code)) {
+    return {
+      status: "error",
+      message: "وارد کردن کدپستی الزامی است"
+    }
+  }
+  if (address === "") {
+    return {
+      status: "error",
+      message: "وارد کردن آدرس الزامی است"
+    }
+  }
+  if (address_id === "" || address_id === null) {
+    return {
+      status: "error",
+      message: "شناسه آدرس الزامی است"
+    }
+  }
+
+  const cookieStore = await cookies()
+  const token = cookieStore.get("token")
+
+  const data = await postFetch(
+    "/profile/addresses/edit",
+    {
+      title,
+      cellphone,
+      postal_code,
+      province_id,
+      city_id,
+      address,
+      address_id
+    },
+    { Authorization: `Bearer ${token.value}` }
+  )
+
+  if (data.status == "success") {
+    revalidatePath("/profile/addresses")
+    return {
+      status: data.status,
+      message: "ویرایش با موفقیت انجام شد"
+    }
+  } else {
+    return {
+      status: data.status,
+      message: handleError(data.message)
+    }
+  }
+}
+
+export const deleteAddress = async (state, formData) => {
+  const address_id = formData.get("address_id")
+
+  if (address_id === "" || address_id === null) {
+    return {
+      status: "error",
+      message: "شناسه آدرس الزامی است"
+    }
+  }
+
+  const cookieStore = await cookies()
+  const token = cookieStore.get("token")
+
+  const data = await postFetch(
+    "/profile/addresses/delete",
+    { address_id },
+    { Authorization: `Bearer ${token.value}` }
+  )
+
+  if (data.status == "success") {
+    revalidatePath("/profile/addresses")
+    return {
+      status: data.status,
+      message: "آدرس با موفقیت حذف شد"
     }
   } else {
     return {

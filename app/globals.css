@@ -1326,3 +1326,9 @@ a:focus {
   left: 15px;
   bottom: 16px;
 }
+
+.form-delete-address {
+  position: absolute;
+  left: 16px;
+  bottom: 18px;
+}
