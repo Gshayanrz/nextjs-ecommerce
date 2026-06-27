@@ -157,3 +157,24 @@ export const resendOtp = async (state, formData) => {
     }
   }
 }
+
+export const logout = async () => {
+  const token = (await cookies()).get("token")
+
+  const data = await postFetch(
+    "/auth/logout",
+    {},
+    { Authorization: `Bearer ${token.value}` }
+  )
+
+  if (data.status == "success") {
+    ;(await cookies()).delete("token")
+    return {
+      success: "شما خارج شدید"
+    }
+  } else {
+    return {
+      error: "User Forbidden"
+    }
+  }
+}
